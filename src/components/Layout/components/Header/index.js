@@ -1,26 +1,21 @@
-import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind';
 import style from './Header.module.scss'
 import images from '~/assets/images';
-import HeadlessTippy from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCircleXmark, faSpinner,
-    faMagnifyingGlass, faPlus,
+    faPlus,
     faEllipsisVertical, faEarthAsia,
     faCircleQuestion, faKeyboard,
     faArrowRightFromBracket, faGear
 } from '@fortawesome/free-solid-svg-icons';
 import { faUser, faCirclePlay } from '@fortawesome/free-regular-svg-icons';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
-import AccountsItem from '~/components/AccountsItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
 import { UploadIcon, MessagesIcon, MailBoxIcon } from '~/components/Icons';
 import Image from '~/components/Image';
-
+import Search from '../Search';
 const MENU_ITEMS = [
     {
         icon: faEarthAsia,
@@ -55,25 +50,6 @@ const MENU_ITEMS = [
 
 const cx = classNames.bind(style)
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([]);
-        }, 0);
-    }, []);
-
-    //Handle 
-    const handleOnChange = (item) => {
-        const menuType = item.type;
-        switch (menuType) {
-            case 'language':
-
-                break;
-            default:
-
-        }
-    }
 
     const currentUser = true;
 
@@ -101,40 +77,24 @@ function Header() {
             to: '/'
         },
     ]
+
+    //Handle 
+    const handleOnChange = (item) => {
+        const menuType = item.type;
+        switch (menuType) {
+            case 'language':
+                break;
+            default:
+
+        }
+    }
+
     return <header className={cx('wrapper')}>
         <div className={cx('inner')}>
             <div className={cx('logo')}>
                 <img src={images.logo.default} alt="Tiktok"></img>
             </div>
-            <HeadlessTippy
-                interactive
-                visible={searchResult.length > 0}
-                render={attrs => (
-                    <PopperWrapper>
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <h3 className={cx('search-title')}>
-                                Accounts
-                            </h3>
-                            <AccountsItem></AccountsItem>
-                            <AccountsItem></AccountsItem>
-                            <AccountsItem></AccountsItem>
-                            <AccountsItem></AccountsItem>
-                        </div>
-                    </PopperWrapper>
-                )}
-            >
-                <div className={cx('search')}>
-                    <input placeholder='Search accounts and videos' spellCheck={false}></input>
-                    <button className={cx('clear')}>
-                        <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
-                    </button>
-                    <FontAwesomeIcon className={cx('loading')} icon={faSpinner}></FontAwesomeIcon>
-                    <button className={cx('search-btn')}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
-                    </button>
-                </div>
-            </HeadlessTippy>
-
+            <Search></Search>
             <div className={cx('actions')}>
                 {currentUser ? (
                     <div className={cx('actions_')}>
@@ -164,7 +124,8 @@ function Header() {
                             content="Inbox"
                             delay={[0, 50]}
                         >
-                            <button className={cx('action-btn')}>
+                            <button className={cx('action-btn', 'action-message')}>
+                                <div>12</div>
                                 <MailBoxIcon></MailBoxIcon>
                             </button>
                         </Tippy>
