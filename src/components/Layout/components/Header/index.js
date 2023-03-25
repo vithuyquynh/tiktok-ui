@@ -34,7 +34,7 @@ const MENU_ITEMS = [
                     type: 'language',
                     code: 'vi',
                     title: 'Tiếng Việt',
-                }
+                },
             ]
         }
     },
@@ -59,7 +59,7 @@ function Header() {
         {
             icon: faUser,
             title: 'View profile',
-            to: '/profile'
+            to: '/'
         },
         {
             icon: faCirclePlay,

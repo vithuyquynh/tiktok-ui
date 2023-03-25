@@ -7,7 +7,6 @@ import Header from "./Header";
 import { useState } from "react";
 const cx = classNames.bind(styles)
 function Menu({ children, items = [], hideOnClick = 'false', onChange = () => { } }) {
-
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
@@ -43,7 +42,9 @@ function Menu({ children, items = [], hideOnClick = 'false', onChange = () => { 
                                     setHistory(prev => prev.splice(0, prev.length - 1))
                                 }}>
                             </Header>}
-                        {renderItems()}
+                        <div className={cx('menu-body')}>
+                            {renderItems()}
+                        </div>
                     </PopperWrapper>
                 </ div>
             )}
