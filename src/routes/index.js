@@ -1,6 +1,6 @@
-import routesConfig from '~/config/routes'
+import { routesConfig } from '~/config'
 // Layout
-import { HeaderOnly } from '~/components/Layout';
+import { HeaderOnly } from '~/layouts';
 
 // Page
 import Home from '~/pages/Home';

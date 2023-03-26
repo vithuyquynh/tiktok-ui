@@ -1,4 +1,4 @@
-import routesConfig from '~/config/routes';
+import { routesConfig } from '~/config';
 import classNames from 'classnames/bind';
 import style from './Header.module.scss'
 import images from '~/assets/images';
