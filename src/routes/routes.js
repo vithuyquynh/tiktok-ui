@@ -1,4 +1,4 @@
-import { routesConfig } from '~/config'
+import config from '~/config'
 // Layout
 import { HeaderOnly } from '~/layouts';
 
@@ -8,15 +8,17 @@ import Following from '~/pages/Following';
 import Profile from '~/pages/Profile';
 import Upload from '~/pages/Upload';
 import Search from '~/pages/Search';
+import Live from '~/pages/Live';
 
 //Public Routes
 
 const publicRoutes = [
-    { path: routesConfig.home, components: Home },
-    { path: routesConfig.following, components: Following },
-    { path: routesConfig.profile, components: Profile },
-    { path: routesConfig.upload, components: Upload, layout: HeaderOnly },
-    { path: routesConfig.search, components: Search, layout: null },
+    { path: config.routes.home, components: Home },
+    { path: config.routes.following, components: Following },
+    { path: config.routes.live, components: Live },
+    { path: config.routes.profile, components: Profile },
+    { path: config.routes.upload, components: Upload, layout: HeaderOnly },
+    { path: config.routes.search, components: Search, layout: null },
 ]
 
 //Privater Routes
