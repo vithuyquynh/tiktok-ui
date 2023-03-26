@@ -10,8 +10,6 @@ import {
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss'
 import { useDebounce } from '~/hooks';
-
-// import *as searchService from '~/services/searchService';
 import *as searchService from '~/services/searchService';
 const cx = classNames.bind(styles)
 
@@ -19,26 +17,26 @@ function Search() {
 
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [showSearchResult, setShowSearchResult] = useState(true);
+    const [showSearchResult, setShowSearchResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
 
-    const debounce = useDebounce(searchValue, 600);
+    const debounceValue = useDebounce(searchValue, 600);
 
 
     useEffect(() => {
-        if (!debounce.trim()) {
+        if (!debounceValue.trim()) {
             return;
         }
         const fetchApi = async () => {
             setLoading(true)
-            const result = await searchService.search(debounce);
+            const result = await searchService.search(debounceValue);
             setSearchResult(result);
             setLoading(false)
         }
         fetchApi()
-    }, [debounce]);
+    }, [debounceValue]);
 
     // Handle 
     const handleClear = () => {
