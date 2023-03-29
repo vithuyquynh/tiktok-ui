@@ -6,7 +6,7 @@ import style from './DefaultLayout.module.scss'
 const cx = classNames.bind(style)
 function DefaultLayout({ children }) {
     return (
-        <div style={{ height: 2000 }} className={cx('wrapper')}>
+        <div className={cx('wrapper')}>
             <Header></Header>
             <div className={cx('container')}>
                 <SideBar></SideBar>

@@ -4,7 +4,7 @@
     padding: 6px 16px;
     cursor: pointer;
     &:hover {
-        background: rgba(22, 24, 35, 0.03);
+        background-color: rgba(22, 24, 35, 0.03);
     }
 }
 .avatar {
@@ -23,6 +23,7 @@
     font-size: 1.6rem;
     font-weight: 500;
     color: var(--text-color);
+    font-weight: 600;
 }
 .check {
     margin-left: 6px;

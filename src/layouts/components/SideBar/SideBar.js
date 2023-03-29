@@ -2,6 +2,7 @@ import config from "~/config";
 import classNames from "classnames/bind";
 import style from './SideBar.module.scss'
 import Menu, { MenuItem } from "./Menu";
+import SuggestedAccounts from "./SuggestedAccounts";
 import {
     HomeIcon, HomeActiveIcon,
     UserGroupIcon, UserGroupActiveIcon,
@@ -9,6 +10,7 @@ import {
 } from "~/components/Icons";
 const cx = classNames.bind(style)
 function SideBar() {
+
     return (
         <aside className={cx('wrapper')}>
             <Menu className={'menu-list'}>
@@ -40,6 +42,8 @@ function SideBar() {
                 >
                 </MenuItem>
             </Menu>
+            <SuggestedAccounts label='Suggested Accounts' title='See all' />
+            <SuggestedAccounts label='Following accounts' title='See more' />
         </aside>
     )
 }
