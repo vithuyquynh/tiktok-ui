@@ -7,15 +7,15 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import Button from '~/components/Button';
 import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
-function AccountPreview({ src, alt, username, fullName }) {
+function AccountPreview({ data }) {
     return (
         <div className={cx('preview')}>
             <div className={cx('heading')}>
-                <Link to={`@${username}`}>
+                <Link to={`@${data.nickname}`}>
                     <Image
-                        src={src}
-                        alt={alt}
                         className={cx('avatar')}
+                        src={data.avatar}
+                        alt={data.nickname}
                     >
 
                     </Image>
@@ -24,15 +24,15 @@ function AccountPreview({ src, alt, username, fullName }) {
             </div>
             <div className={cx('infor')}>
                 <h4 className={cx('username')}>
-                    <span>{username}</span>
+                    <span>{data.nickname}</span>
                     {true && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle}></FontAwesomeIcon>}
                 </h4>
-                <span className={cx('name')}>{fullName}</span>
+                <span className={cx('name')}>{`${data.first_name} ${data.last_name}`}</span>
             </div>
             <div className={cx('footer')}>
-                <span className={cx('statsText')}>8.3M</span>
+                <span className={cx('statsText')}>{data.followers_count}</span>
                 <span className={cx('statsDesc')}>Followers</span>
-                <span className={cx('statsText')}>5M</span>
+                <span className={cx('statsText')}>{data.likes_count}</span>
                 <span className={cx('statsDesc')}>Likes</span>
             </div>
         </div>
@@ -40,10 +40,7 @@ function AccountPreview({ src, alt, username, fullName }) {
 }
 
 AccountPreview.propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
+    data: PropTypes.object
 }
 
 export default AccountPreview;

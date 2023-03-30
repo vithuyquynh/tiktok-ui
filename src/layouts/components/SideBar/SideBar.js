@@ -1,5 +1,5 @@
-import config from "~/config";
 import classNames from "classnames/bind";
+import { useState, useEffect } from 'react'
 import style from './SideBar.module.scss'
 import Menu, { MenuItem } from "./Menu";
 import SuggestedAccounts from "./SuggestedAccounts";
@@ -8,8 +8,55 @@ import {
     UserGroupIcon, UserGroupActiveIcon,
     LiveIcon, LiveActiveIcon,
 } from "~/components/Icons";
-const cx = classNames.bind(style)
+import config from "~/config";
+import *as userService from '~/services/userService'
+// import *as followingService from '~/services/followingService'
+const cx = classNames.bind(style);
+const INIT_PAGE = 1;
+const PER_PAGE = 5;
+
+
 function SideBar() {
+
+    //ApiSuggested
+
+    const [suggestedUsers, setSuggestedUsers] = useState([]);
+    const [isSeeAll, setIsSeeAll] = useState(false);
+    const [page, setPage] = useState(INIT_PAGE);
+    useEffect(() => {
+        userService
+            .getSuggested({ page, perPage: PER_PAGE })
+            .then(data => {
+                if (isSeeAll) {
+                    setSuggestedUsers(prevUsers => [...prevUsers, ...data]);
+                } else {
+                    setSuggestedUsers(data);
+                }
+            })
+            .catch(error => console.log(error))
+    }, [page, isSeeAll])
+    const handleViewChange = () => {
+        if (isSeeAll) {
+            setPage(page - 1);
+        } else {
+            setPage(page + 1);
+        }
+        setIsSeeAll(!isSeeAll);
+    }
+
+
+    //ApiFollowing
+
+    // const [userFollowing, setUserFollowing] = useState([])
+
+    // useEffect(() => {
+    //     followingService
+    //         .getFollowing({ page: 1 })
+    //         .then(data => {
+    //             setUserFollowing(data)
+    //         })
+    //     // fetch()
+    // }, [])
 
     return (
         <aside className={cx('wrapper')}>
@@ -42,8 +89,8 @@ function SideBar() {
                 >
                 </MenuItem>
             </Menu>
-            <SuggestedAccounts label='Suggested Accounts' title='See all' />
-            <SuggestedAccounts label='Following accounts' title='See more' />
+            <SuggestedAccounts isSeeAll={isSeeAll} onViewChange={handleViewChange} data={suggestedUsers} label='Suggested Accounts' title='See all' />
+            {/* <SuggestedAccounts data={userFollowing} label='Following accounts' title='See more' /> */}
         </aside>
     )
 }

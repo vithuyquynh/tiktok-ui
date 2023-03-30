@@ -10,18 +10,13 @@ import Tippy from '@tippyjs/react/headless';
 import AccountPreview from './AccountPreview';
 const cx = classNames.bind(styles);
 
-function AccountItem({ src, alt, username, fullName }) {
+function AccountItem({ data }) {
 
     const renderPreview = (props) => {
         return (
             <div tabIndex='-1' {...props}>
                 <PopperWrapper>
-                    <AccountPreview
-                        src={src}
-                        alt={alt}
-                        username={username}
-                        fullName={fullName}
-                    >
+                    <AccountPreview data={data}>
                     </AccountPreview>
                 </PopperWrapper>
             </div>
@@ -38,19 +33,19 @@ function AccountItem({ src, alt, username, fullName }) {
                 render={renderPreview}
                 offset={[-8, -2]}
             >
-                <Link to={`@${username}`} className={cx('account-item')}>
+                <Link to={`@${data.nickname}`} className={cx('account-item')}>
                     <Image
                         className={cx('avatar')}
-                        src={src}
-                        alt={fullName}
+                        src={data.avatar}
+                        alt={data.nickname}
                     >
                     </Image>
                     <div className={cx('infor')}>
                         <h4 className={cx('username')}>
-                            <span>{username}</span>
-                            {true && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle}></FontAwesomeIcon>}
+                            <span>{data.nickname}</span>
+                            {data.tick && <FontAwesomeIcon className={cx('check')} icon={faCheckCircle}></FontAwesomeIcon>}
                         </h4>
-                        <span className={cx('name')}>{fullName}</span>
+                        <span className={cx('name')}>{`${data.first_name} ${data.last_name}`}</span>
                     </div>
                 </Link >
             </Tippy>
@@ -59,10 +54,7 @@ function AccountItem({ src, alt, username, fullName }) {
 }
 
 AccountItem.propTypes = {
-    src: PropTypes.string.isRequired,
-    alt: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
+    data: PropTypes.object,
 }
 
 export default AccountItem;
