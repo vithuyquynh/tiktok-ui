@@ -7,7 +7,7 @@ const cx = classNames.bind(styles);
 function VideoContent() {
     return (
         <div className={cx('wrapper')}>
-            <VideoInfor></VideoInfor>
+            <VideoInfor ></VideoInfor>
             <VideoAudio></VideoAudio>
         </div>
     );

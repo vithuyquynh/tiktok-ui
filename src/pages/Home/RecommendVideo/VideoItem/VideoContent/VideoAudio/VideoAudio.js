@@ -1,5 +1,8 @@
 import classNames from "classnames/bind";
 import styles from './VideoAudio.module.scss'
+import ActionBtn from "./ActionBtn";
+import { faCommentDots, faHeart, faShare } from "@fortawesome/free-solid-svg-icons";
+import MenuItem from './MenuItem'
 const cx = classNames.bind(styles);
 
 function VideoAudio() {
@@ -13,7 +16,13 @@ function VideoAudio() {
                 >
                 </video>
             </div>
-            <div>Action</div>
+            <div className={cx('actions')}>
+                <ActionBtn like icon={faHeart} actionCount="3.9M"></ActionBtn>
+                <ActionBtn comment icon={faCommentDots} actionCount="3.9M"></ActionBtn>
+                <MenuItem>
+                    <ActionBtn share icon={faShare} actionCount="3.9M"></ActionBtn>
+                </MenuItem>
+            </div>
         </div>
     );
 }

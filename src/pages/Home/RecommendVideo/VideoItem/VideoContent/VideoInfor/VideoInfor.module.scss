@@ -13,8 +13,10 @@
     width: 510px;
 }
 .infor {
-    display: flex;
-    justify-content: space-between;
+    cursor: pointer;
+    &:hover .username {
+        text-decoration: underline;
+    }
 }
 
 .username {

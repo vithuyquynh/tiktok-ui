@@ -1,11 +1,12 @@
 .wrapper {
     margin-top: 12px;
     display: flex;
-    align-items: end;
+    align-items: flex-end;
 }
 .content {
     width: 278px;
     height: 494px;
+    margin-right: 20px;
 }
 
 .audio {
